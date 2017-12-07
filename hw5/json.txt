@@ -1,0 +1,1 @@
+﻿[{"firstName":"Иван","lastName":"Иванов","address":"г.Москва, ул. Алиева,2","phoneNumber":"812 123-1234"},{"firstName":"Петр","lastName":"Петров","address":"г.Москва, ул. Алиева,3","phoneNumber":"812 123-4321"}]

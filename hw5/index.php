@@ -12,12 +12,11 @@ $data_res = json_decode($json,true);
 </head>
 <body>
 <?foreach ($data_res as $data):?>
-<?foreach ($data as $key => $value):?>
-    <dl>
-        <dt><?=$key;?></dt>
-        <dd><?=$value;?></dd>
-    </dl>
-<?endforeach;?>
+     <dl>
+         <dt><?=$data["lastName"]." ".$data["firstName"];?></dt>
+         <dd><?=$data["address"];?></dd>
+         <dd><?=$data["phoneNumber"];?></dd>
+     </dl>
 <?endforeach;?>
 </body>
 </html>

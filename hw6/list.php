@@ -16,12 +16,11 @@ else {
     <title>Список тестов</title>
 </head>
 <body>
-
 <ul>
-    <?foreach ($list as $key => $value):?>
-    <li><a href="<?="/test.php?testid="."$key"?>"><?=$value;?></a></li>
-    <?endforeach;?>
+    <?php foreach ($list as $key => $value):?>
+    <li><a href="<?php echo 'test.php?testid='.$key?>"><?php echo $value;?></a></li>
+    <?php endforeach;?>
 </ul>
-<p></p><a href="/admin.php">Загрузка тестов</a></p>
+<p></p><a href="admin.php">Загрузка тестов</a></p>
 </body>
 </html>

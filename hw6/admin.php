@@ -1,22 +1,22 @@
 <?php
 if (isset($_FILES["file"]["name"]) && !empty($_FILES["file"]["name"])) {
     $filename = $_FILES["file"]["name"];
-    $sFilename = explode(".", $filename);
+    $pathInfo = pathinfo("$filename");
     $file = file_get_contents($filename);
     $test = json_decode($file,true);
-    if ($sFilename[1] != "json" || count($test) < 2) {
+    if ($pathInfo["extension"] != "json" || count($test) < 2) {
         echo "<p style='color:darkred'>Неподходящий формат файла</p>";
     }
     elseif (($_FILES["file"]["error"] == UPLOAD_ERR_OK) && move_uploaded_file($_FILES["file"]["tmp_name"],$_FILES["file"]["name"])) {
         if (file_exists("testlist.json")) {
             $testList = file_get_contents("testlist.json");
             $testListDecoded = json_decode($testList,true);
-            if (in_array("$sFilename[0]",$testListDecoded)) {
+            if (in_array($pathInfo["filename"],$testListDecoded)) {
                 echo "<p style='color:darkred'>Этот тест уже загружен</p>";
                 exit;
             }
         }
-        $testListDecoded[] = $sFilename[0];
+        $testListDecoded[] = $pathInfo["filename"];
         $testListEncoded = json_encode($testListDecoded);
         file_put_contents("testlist.json",$testListEncoded);
         echo "<p style='color:lightseagreen'>Файл загружен</p>";
@@ -35,11 +35,11 @@ if (isset($_FILES["file"]["name"]) && !empty($_FILES["file"]["name"])) {
     <title>Загрузи тест!</title>
 </head>
 <body>
-    <form method="post" action="/admin.php" enctype = "multipart/form-data">
+    <form method="post" action="admin.php" enctype = "multipart/form-data">
         <input type="file" name="file">
         <input type="submit" value="Загрузить">
     </form>
-    <a href="/list.php">К списку тестов</a>
+    <a href="list.php">К списку тестов</a>
 </body>
 </html>
 

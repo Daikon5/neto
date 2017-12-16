@@ -32,7 +32,7 @@ elseif (isset($_POST[0])) {
     $secondLine = "Вы дали $ansCount правильных ответов из $qCount.";
     $_SESSION["lines"][0] = $firstLine;
     $_SESSION["lines"][1] = $secondLine;
-    echo "<img src='/cert.php'>";
+    echo "<img src='cert.php'>";
 }
 else  {
     echo "Похоже вы попали сюда по ошибке, вернитесь к выбору или загрузке теста.";
@@ -47,20 +47,20 @@ else  {
     <title>Отвечай!</title>
 </head>
 <body>
-<?if ($testing == true):?>
-<?foreach ($tests as $key => $test):?>
-<form method="post" action="/test.php">
-    <p><?=$test["q"];?></p>
-    <input type="radio" name="<?=$key;?>" value="var1"><?=$test["var1"];?><br>
-    <input type="radio" name="<?=$key;?>" value="var2"><?=$test["var2"];?><br>
-    <input type="radio" name="<?=$key;?>" value="var3"><?=$test["var3"];?><br>
-    <input type="radio" name="<?=$key;?>" value="var4"><?=$test["var4"];?><br>
-<?endforeach;?>
+<?php if ($testing == true):?>
+<?php foreach ($tests as $key => $test):?>
+<form method="post" action="test.php">
+    <p><?php echo $test["q"];?></p>
+    <input type="radio" name="<?php echo $key;?>" value="var1"><?php echo $test["var1"];?><br>
+    <input type="radio" name="<?php echo $key;?>" value="var2"><?php echo $test["var2"];?><br>
+    <input type="radio" name="<?php echo $key;?>" value="var3"><?php echo $test["var3"];?><br>
+    <input type="radio" name="<?php echo $key;?>" value="var4"><?php echo $test["var4"];?><br>
+<?php endforeach;?>
     <input type="text" name="name" placeholder="Ваше имя">
     <input type="submit">
-<?endif;?>
+<?php endif;?>
 </form>
-<p><a href="/list.php">Список загруженных тестов</a></p>
-<p></p><a href="/admin.php">Загрузка тестов</a></p>
+<p><a href="list.php">Список загруженных тестов</a></p>
+<p></p><a href="admin.php">Загрузка тестов</a></p>
 </body>
 </html>

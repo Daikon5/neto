@@ -32,7 +32,7 @@ if (isPost()) {
 <?php endforeach; ?>
 </ul>
     <form method="post">
-        <p>Введите логин и пароль для администрирования.</p>
+        <p>Введите логин и пароль для администрирования. (admin:admin)</p>
         <input type="text" name="login" placeholder="Login"><br/><br/>
         <input type="text" name="password" placeholder="Password"><br/>
         <p>Либо представьтесь для гостевого доступа.</p>

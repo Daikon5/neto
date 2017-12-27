@@ -2,7 +2,7 @@
 namespace Classes\Main;
 class Car extends \Classes\Abs\Item implements \Classes\Interfaces\Price
 {
-    protected $price;
+    public $price;
     protected $color;
     protected $discount;
 

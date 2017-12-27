@@ -2,7 +2,7 @@
 namespace Classes\Abs;
 abstract class Item
 {
-    protected $name;
+    public $name;
 
     protected function __construct($name)
     {

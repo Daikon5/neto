@@ -2,7 +2,7 @@
 namespace Classes\Main;
 class SomeItem extends \Classes\Abs\Item implements \Classes\Interfaces\ItemAction
 {
-    private $price;
+    public $price;
     private $count;
 
     public function __construct($n,$price,$count)

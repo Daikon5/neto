@@ -7,12 +7,3 @@ function myAutoload($className) {
         include "$pathToFile";
     }
 }
-
-function includeAI($name) {
-    if ($name == "item") {
-        include "classes/abs/item.php";
-    }
-    else {
-        include "classes/interfaces/$name".".php";
-    }
-}

@@ -1,6 +1,8 @@
 <?php
 namespace Classes\Main;
-class Pen extends \Classes\Abs\Item implements \Classes\Interfaces\ActionPen
+use \Classes\Abs\Item;
+use \Classes\Interfaces\ActionPen;
+class Pen extends Item implements ActionPen
 {
     private $color;
 

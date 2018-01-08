@@ -1,6 +1,8 @@
 <?php
 namespace Classes\Main;
-class Car extends \Classes\Abs\Item implements \Classes\Interfaces\Price
+use \Classes\Abs\Item;
+use \Classes\Interfaces\Price;
+class Car extends Item implements Price
 {
     public $price;
     protected $color;

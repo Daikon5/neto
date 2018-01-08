@@ -1,6 +1,8 @@
 <?php
 namespace Classes\Main;
-class TV extends \Classes\Abs\Item implements \Classes\Interfaces\TvControls
+use \Classes\Abs\Item;
+use \Classes\Interfaces\TvControls;
+class TV extends Item implements TvControls
 {
     private $work = 0;
     private $channel = 0;

@@ -1,6 +1,8 @@
 <?php
 namespace Classes\Main;
-class SomeItem extends \Classes\Abs\Item implements \Classes\Interfaces\ItemAction
+use \Classes\Abs\Item;
+use \Classes\Interfaces\ItemAction;
+class SomeItem extends Item implements ItemAction
 {
     public $price;
     private $count;

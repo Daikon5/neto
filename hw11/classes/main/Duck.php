@@ -1,6 +1,8 @@
 <?php
 namespace Classes\Main;
-class Duck extends \Classes\Abs\Item implements \Classes\Interfaces\ActionDuck
+use \Classes\Abs\Item;
+use \Classes\Interfaces\ActionDuck;
+class Duck extends Item implements ActionDuck
 {
     private $color;
     private $legsNumber = 2;

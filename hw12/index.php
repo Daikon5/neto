@@ -16,7 +16,6 @@ if (!empty($_GET)) {
         }
         $c++;
     }
-    echo $sqlCommand;
 }
 ?>
 

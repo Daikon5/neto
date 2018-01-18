@@ -6,12 +6,12 @@ $sqlDel = NULL;
 if (!empty($_POST)) {
     if (isset($_POST['task_add'])) {
         $task = $_POST['task_add'];
-        $taskDate = date('D.M.Y')." ".date('H:i:s');
+        $taskDate = date('Y-m-d')." ".date('H:i:s');
         $sqlAdd = "INSERT INTO tasks (id, description, is_done, date_added) VALUES (?,?,?,?)";
     }
     elseif (isset($_POST['task_done'])) {
         $taskDone = (int)$_POST['task_done'];
-        $sqlDone = "UPDATE tasks WHERE id=? SET is_done=1";
+        $sqlDone = "UPDATE tasks SET is_done=1 WHERE id=?";
     }
     elseif (isset($_POST['task_del'])) {
         $taskDel = (int)$_POST['task_del'];
@@ -34,22 +34,33 @@ if (!empty($_POST)) {
 <h1>ToDo:</h1>
 
 <?php
-$db = new PDO("mysql:host=localhost;dbname=netology;charset=utf8",'mysql','mysql');
+try {
+    $db = new PDO("mysql:host=localhost;dbname=netology;charset=utf8", 'mysql', 'mysql');
+    $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+    if ($sqlAdd != NULL) {
+        $db->prepare($sqlAdd)->execute([NULL,$task,0,$taskDate]);
+    }
+    if ($sqlDone != NULL) {
+        $db->prepare($sqlDone)->execute([$taskDone]);
+    }
+    if ($sqlDel != NULL) {
+        $db->prepare($sqlDel)->execute([$taskDel]);
+    }
+}
+catch (PDOException $e) {
+    echo "Ошибки execute: ";
+    echo $e->getMessage();
+}
 
-if ($sqlAdd != NULL) {
-    $sth = $db->prepare($sqlAdd);
-    $sth->execute([NULL,$task,0,$taskDate]) or die ("Problems adding!");
+try {
+    $db = new PDO("mysql:host=localhost;dbname=netology;charset=utf8", 'mysql', 'mysql');
+    $query = $db->query($sqlCommand);
 }
-if ($sqlDone != NULL) {
-    $sth = $db->prepare($sqlDone);
-    $sth->execute([$taskDone]) or die ("Problems checking!");
-}
-if ($sqlDel != NULL) {
-    $sth = $db->prepare($sqlDel) or die ("Problems deleting!");
-    $sth->execute([$taskDel]);
+catch (PDOException $e) {
+    echo "Ошибки query: ";
+    echo $e->getMessage();
 }
 
-$query = $db->query($sqlCommand) or die ("Query problems, pal!");
 echo "<table border='1'>";
 echo "<tr><th>id</th><th>Задача</th><th>Выполнена?</th><th>Дата создания</th></tr>";
 while ($tablerows = $query->fetch()) {

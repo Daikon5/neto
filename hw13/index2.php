@@ -6,6 +6,7 @@ $id = NULL;
 $sqlAdd = NULL;
 $sqlActionDone = NULL;
 $sqlActionUpdate = NULL;
+$sqlUpdate = NULL;
 $sqlActionDel = NULL;
 $descToEdit = NULL;
 $newDesc = NULL;
@@ -66,9 +67,7 @@ try {
     if ($sqlActionDel != NULL) {
         $db->prepare($sqlActionDel)->execute([$id]);
     }
-    if ($sqlActionUpdate != NULL) {
-        echo $newDesc;
-        echo $id;
+    if ($sqlUpdate != NULL) {
         $db->prepare($sqlUpdate)->execute([$newDesc,$id]);
     }
 }

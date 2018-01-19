@@ -54,6 +54,7 @@ catch (PDOException $e) {
 
 try {
     $db = new PDO("mysql:host=localhost;dbname=netology;charset=utf8", 'mysql', 'mysql');
+    $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
     $query = $db->query($sqlCommand);
 }
 catch (PDOException $e) {

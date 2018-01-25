@@ -1,0 +1,13 @@
+{
+    "name": "daikon/netology",
+    "authors": [
+        {
+            "name": "Alexey Alexandrov",
+            "email": "fiveman123@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "yandex/geo": "1.1.3"
+    }
+}

@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+require_once 'dbconfig.php';
+
 $login = NULL;
 $password = NULL;
 $count = NULL;
@@ -10,7 +13,6 @@ if (!empty($_POST)) {
         $login = strip_tags($_POST['login']);
         $password = strip_tags($_POST['password']);
         try {
-            $db = new PDO("mysql:host=localhost;dbname=neto;charset=utf8",'mysql','mysql');
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $query = $db->prepare($sqlQuery);
             $query->execute([$login,$password]);
@@ -35,7 +37,6 @@ if (!empty($_POST)) {
         $password = strip_tags($_POST['password']);
         $sqlQuery = "SELECT * FROM user WHERE login=?";
         try {
-            $db = new PDO("mysql:host=localhost;dbname=neto;charset=utf8",'mysql','mysql');
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $query = $db->prepare($sqlQuery);
             $query->execute([$login]);

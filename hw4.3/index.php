@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+require_once 'dbconfig.php';
+
 $sqlCommand = "SELECT t.id, t.description, t.date_added, t.is_done, us.login as assigned_user_name, u.login as user_name 
                    FROM task t 
                    JOIN user u ON u.id = t.user_id 
@@ -17,7 +20,7 @@ $newDesc = NULL;
 $editing = 0;
 
 if (!isset($_SESSION['login'])) {
-    echo "<a href='/register.php'>Войдите или зарегистрируйтесь</a>";
+    echo "<a href='register.php'>Войдите или зарегистрируйтесь</a>";
     die;
 }
 else {
@@ -77,7 +80,6 @@ if (!empty($_GET)) {
 
 <?php
 try {
-    $db = new PDO("mysql:host=localhost;dbname=neto;charset=utf8", 'mysql', 'mysql');
     $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
     if ($sqlAdd != NULL) {
         $db->prepare($sqlAdd)->execute([NULL,$task,0,$taskDate,$userId,$userId]);
@@ -116,7 +118,6 @@ catch (PDOException $e) {
 <?php
 try {
     $sqlCommandNames = "SELECT id, login FROM user WHERE NOT login = ?";
-    $db = new PDO("mysql:host=localhost;dbname=neto;charset=utf8", 'mysql', 'mysql');
     $query = $db->prepare($sqlCommand);
     $query->execute([$login]);
 
@@ -148,14 +149,14 @@ while ($tablerows = $query->fetch()) {
               <td>$tablerows[2]</td>
               <td>$status</td>";
     if ($tablerows[4] == $tablerows[5]) {
-        echo "<td><a href='/index.php?id=$tablerows[0]&action=edit'>Изменить</a>
-                  <a href='/index.php?id=$tablerows[0]&action=done'>Выполнить</a>
-                  <a href='/index.php?id=$tablerows[0]&action=delete'>Удалить</a>
+        echo "<td><a href='index.php?id=$tablerows[0]&action=edit'>Изменить</a>
+                  <a href='index.php?id=$tablerows[0]&action=done'>Выполнить</a>
+                  <a href='index.php?id=$tablerows[0]&action=delete'>Удалить</a>
               </td>";
     }
     else {
-        echo "<td><a href='/index.php?id=$tablerows[0]&action=edit'>Изменить</a>
-                  <a href='/index.php?id=$tablerows[0]&action=delete'>Удалить</a>
+        echo "<td><a href='index.php?id=$tablerows[0]&action=edit'>Изменить</a>
+                  <a href='index.php?id=$tablerows[0]&action=delete'>Удалить</a>
               </td>";
     }
     echo "    <td>$tablerows[4]</td>
@@ -167,7 +168,6 @@ while ($tablerows = $query->fetch()) {
         $id = $names['id'];
         $name = $names['login'];
         echo "<option value=\"$task_id,$id\">$name</option>";
-        //echo "<input type=\"hidden\" name=\"task_id\" value=\"$tablerows[0]\">";
     }
     echo "           </select>
                      <input type=\"submit\" value=\"Переложить ответственность\">
@@ -185,7 +185,6 @@ try {
                    JOIN user u ON u.id = t.user_id 
                    JOIN user us ON us.id = t.assigned_user_id 
                    WHERE us.login = ? AND NOT u.login = ?";
-    $db = new PDO("mysql:host=localhost;dbname=neto;charset=utf8", 'mysql', 'mysql');
     $query = $db->prepare($sqlCommand);
     $query->execute([$login,$login]);
 }

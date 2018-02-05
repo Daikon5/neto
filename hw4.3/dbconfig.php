@@ -6,7 +6,7 @@ define ('DBPASS','mysql');
 define ('CHARSET','utf8');
 
 try {
-    $dsn = sprintf('mysql:host=%s;dbname=%s;charset=utf8', HOST, DBNAME);
+    $dsn = sprintf('mysql:host=%s;dbname=%s;charset=%s', HOST, DBNAME, CHARSET);
     $db = new PDO($dsn, DBLOGIN, DBPASS);
 }
 
